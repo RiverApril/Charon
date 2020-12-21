@@ -3,22 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		854D8C782589CA4200607035 /* base.soul.py in Resources */ = {isa = PBXBuildFile; fileRef = 854D8C772589CA4200607035 /* base.soul.py */; };
+		854D8C782589CA4200607035 /* bases.xsoul.py in Resources */ = {isa = PBXBuildFile; fileRef = 854D8C772589CA4200607035 /* bases.xsoul.py */; };
+		854D8C832589E2C100607035 /* hex.soul.py in Resources */ = {isa = PBXBuildFile; fileRef = 854D8C822589E2C100607035 /* hex.soul.py */; };
+		854D8C862589E2EC00607035 /* bin.soul.py in Resources */ = {isa = PBXBuildFile; fileRef = 854D8C852589E2EC00607035 /* bin.soul.py */; };
+		85C98D98258AADFB0025B02F /* spell.soul.py in Resources */ = {isa = PBXBuildFile; fileRef = 85C98D97258AADFB0025B02F /* spell.soul.py */; };
+		85C98D9C258AD57A0025B02F /* calc.py in Resources */ = {isa = PBXBuildFile; fileRef = 85C98D9B258AD57A0025B02F /* calc.py */; };
 		85D4736425874145007F2C78 /* KharonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4736325874145007F2C78 /* KharonApp.swift */; };
 		85D4736625874145007F2C78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4736525874145007F2C78 /* ContentView.swift */; };
 		85D4736825874146007F2C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D4736725874146007F2C78 /* Assets.xcassets */; };
 		85D4736B25874146007F2C78 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D4736A25874146007F2C78 /* Preview Assets.xcassets */; };
 		85D4737525874DCC007F2C78 /* Ferry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4737425874DCC007F2C78 /* Ferry.swift */; };
-		85D4737A25875C38007F2C78 /* echo.soul.py in Resources */ = {isa = PBXBuildFile; fileRef = 85D4737925875C38007F2C78 /* echo.soul.py */; };
-		85D473832587F4B5007F2C78 /* python.soul.py in Resources */ = {isa = PBXBuildFile; fileRef = 85D473822587F4B5007F2C78 /* python.soul.py */; };
+		85D4737A25875C38007F2C78 /* echo.xsoul.sh in Resources */ = {isa = PBXBuildFile; fileRef = 85D4737925875C38007F2C78 /* echo.xsoul.sh */; };
+		85D473832587F4B5007F2C78 /* dec.soul.py in Resources */ = {isa = PBXBuildFile; fileRef = 85D473822587F4B5007F2C78 /* dec.soul.py */; };
+		A6FABD34FCC8ECDF9AE8F8A7 /* Pods_Kharon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2136ECA7A78536D96F31BC6F /* Pods_Kharon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		854D8C772589CA4200607035 /* base.soul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = base.soul.py; sourceTree = "<group>"; };
+		2136ECA7A78536D96F31BC6F /* Pods_Kharon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kharon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		854D8C772589CA4200607035 /* bases.xsoul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = bases.xsoul.py; sourceTree = "<group>"; };
+		854D8C822589E2C100607035 /* hex.soul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = hex.soul.py; sourceTree = "<group>"; };
+		854D8C852589E2EC00607035 /* bin.soul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = bin.soul.py; sourceTree = "<group>"; };
+		85C98D97258AADFB0025B02F /* spell.soul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = spell.soul.py; sourceTree = "<group>"; };
+		85C98D9B258AD57A0025B02F /* calc.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = calc.py; sourceTree = "<group>"; };
 		85D4736025874145007F2C78 /* Kharon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kharon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85D4736325874145007F2C78 /* KharonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KharonApp.swift; sourceTree = "<group>"; };
 		85D4736525874145007F2C78 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,8 +37,10 @@
 		85D4736C25874146007F2C78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85D4736D25874146007F2C78 /* Kharon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kharon.entitlements; sourceTree = "<group>"; };
 		85D4737425874DCC007F2C78 /* Ferry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ferry.swift; sourceTree = "<group>"; };
-		85D4737925875C38007F2C78 /* echo.soul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = echo.soul.py; sourceTree = "<group>"; };
-		85D473822587F4B5007F2C78 /* python.soul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = python.soul.py; sourceTree = "<group>"; };
+		85D4737925875C38007F2C78 /* echo.xsoul.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = echo.xsoul.sh; sourceTree = "<group>"; };
+		85D473822587F4B5007F2C78 /* dec.soul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = dec.soul.py; sourceTree = "<group>"; };
+		BD0A052086D6E60E1E68F694 /* Pods-Kharon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kharon.debug.xcconfig"; path = "Target Support Files/Pods-Kharon/Pods-Kharon.debug.xcconfig"; sourceTree = "<group>"; };
+		C9E7103B374B959BEB9C1FD2 /* Pods-Kharon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kharon.release.xcconfig"; path = "Target Support Files/Pods-Kharon/Pods-Kharon.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,17 +48,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6FABD34FCC8ECDF9AE8F8A7 /* Pods_Kharon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		639AA5827C8DC2CD2CD3307B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BD0A052086D6E60E1E68F694 /* Pods-Kharon.debug.xcconfig */,
+				C9E7103B374B959BEB9C1FD2 /* Pods-Kharon.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		85D4735725874145007F2C78 = {
 			isa = PBXGroup;
 			children = (
 				85D4736225874145007F2C78 /* Kharon */,
 				85D4736125874145007F2C78 /* Products */,
+				639AA5827C8DC2CD2CD3307B /* Pods */,
+				BABAF770D3F27FC327DADFAA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,11 +108,23 @@
 		85D4737825875C24007F2C78 /* Souls */ = {
 			isa = PBXGroup;
 			children = (
-				85D473822587F4B5007F2C78 /* python.soul.py */,
-				85D4737925875C38007F2C78 /* echo.soul.py */,
-				854D8C772589CA4200607035 /* base.soul.py */,
+				85D473822587F4B5007F2C78 /* dec.soul.py */,
+				85D4737925875C38007F2C78 /* echo.xsoul.sh */,
+				854D8C772589CA4200607035 /* bases.xsoul.py */,
+				854D8C822589E2C100607035 /* hex.soul.py */,
+				854D8C852589E2EC00607035 /* bin.soul.py */,
+				85C98D97258AADFB0025B02F /* spell.soul.py */,
+				85C98D9B258AD57A0025B02F /* calc.py */,
 			);
 			path = Souls;
+			sourceTree = "<group>";
+		};
+		BABAF770D3F27FC327DADFAA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2136ECA7A78536D96F31BC6F /* Pods_Kharon.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,9 +134,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85D4737025874146007F2C78 /* Build configuration list for PBXNativeTarget "Kharon" */;
 			buildPhases = (
+				A73D4FD35A3D80997C185FA3 /* [CP] Check Pods Manifest.lock */,
 				85D4735C25874145007F2C78 /* Sources */,
 				85D4735D25874145007F2C78 /* Frameworks */,
 				85D4735E25874145007F2C78 /* Resources */,
+				BE999A275CA0D7F6EB201309 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -148,15 +186,61 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85D4737A25875C38007F2C78 /* echo.soul.py in Resources */,
+				854D8C832589E2C100607035 /* hex.soul.py in Resources */,
+				85D4737A25875C38007F2C78 /* echo.xsoul.sh in Resources */,
 				85D4736B25874146007F2C78 /* Preview Assets.xcassets in Resources */,
-				854D8C782589CA4200607035 /* base.soul.py in Resources */,
+				854D8C782589CA4200607035 /* bases.xsoul.py in Resources */,
+				85C98D9C258AD57A0025B02F /* calc.py in Resources */,
 				85D4736825874146007F2C78 /* Assets.xcassets in Resources */,
-				85D473832587F4B5007F2C78 /* python.soul.py in Resources */,
+				85C98D98258AADFB0025B02F /* spell.soul.py in Resources */,
+				85D473832587F4B5007F2C78 /* dec.soul.py in Resources */,
+				854D8C862589E2EC00607035 /* bin.soul.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A73D4FD35A3D80997C185FA3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kharon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE999A275CA0D7F6EB201309 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kharon/Pods-Kharon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kharon/Pods-Kharon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kharon/Pods-Kharon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85D4735C25874145007F2C78 /* Sources */ = {
@@ -289,6 +373,7 @@
 		};
 		85D4737125874146007F2C78 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD0A052086D6E60E1E68F694 /* Pods-Kharon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -312,6 +397,7 @@
 		};
 		85D4737225874146007F2C78 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9E7103B374B959BEB9C1FD2 /* Pods-Kharon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

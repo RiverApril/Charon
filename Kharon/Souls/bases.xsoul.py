@@ -11,5 +11,3 @@ hexStr = hex(evaluated)
 binStr = bin(evaluated)
 
 print(decStr, hexStr, binStr, sep="\n", end="")
-
-exit(0)

@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
 import sys
+import calc
 
 input = " ".join(sys.argv[1:])
 
-print(eval(input), end="")
-
-exit(0)
+print(calc.to_hex(calc.evaluate(input)), end="")
