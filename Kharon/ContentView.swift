@@ -19,21 +19,25 @@ struct ContentView: View, LiveInputHandler {
     @ObservedObject private var input = LiveInput()
     
     @State private var showErrors: Bool = false
+    @State private var showErrorsHovering: Bool = false
+    @State private var exitHovering: Bool = false
+    
     @State private var quickNotify: String? = nil
     @State private var quickNotifyTimer: Timer? = nil
+    
+    @State private var soulHovering = [UUID : Bool]()
+    @State private var soulResultHovering = [UUID : Bool]()
     
     init() {
         input.handler = self
     }
     
     func getOutput(liveInput: LiveInput,
-                   input: String,
-                   typing: Bool
+                   input: String
     ) {
         self.ferry.evaluate(
             evaluation: Evaluation(
-                input: input,
-                type: typing ? EvaluationType.fast : EvaluationType.full
+                input: input
             )
         )
     }
@@ -78,30 +82,53 @@ struct ContentView: View, LiveInputHandler {
         inputNSTextField?.currentEditor()?.selectAll(self)
     }
     
+    
+    func getDisplayText(_ soul: Soul) -> (text: String, color: Color) {
+        if soul.result!.status != 0 {
+            if showErrors {
+                return (text: soul.result!.error, color: .red)
+            } else if soul.lastGoodResult != nil {
+                return (text: soul.lastGoodResult!.output, color: .yellow)
+            } else {
+                return (text: "", color: .yellow)
+            }
+        } else {
+            if (soulResultHovering[soul.id] ?? false) {
+                return (text: soul.result!.output, color: .blue)
+            } else {
+                return (text: soul.result!.output, color: .green)
+            }
+        }
+    }
+    
+    
+    
     // Views //
     
     // Input
     var inputView: some View {
-        TextField (
-            "Input",
+        InputTextField (
+            placeHolder: "Input",
             text: $input.value,
-            onEditingChanged: { isEditing in
-                input.typing = isEditing
+            onEnter: {
+                ferry.whenFirstNonEmptyResult(do: { result in
+                    let output = result.output
+                    let endIndex = output.firstIndex(of: "\n") ?? output.endIndex
+                    let firstLine = output[..<endIndex]
+                    
+                    performCopy(copyText: String(firstLine))
+                })
+                ferry.clearAllLastGoodResults()
             },
-            onCommit: {
-                let firstNonEmptySoul: Soul? = ferry.souls.first(where: {!($0.result?.output.isEmpty ?? true)})
-                
-                if firstNonEmptySoul != nil {
-                    performCopy(copyText: firstNonEmptySoul!.result!.output)
-                }
+            onInternalChange: { newNSTextField in
+                inputNSTextField = newNSTextField
             }
         )
         .introspectTextField { textField in
-            inputNSTextField = textField
             textField.becomeFirstResponder()
         }
         .disableAutocorrection(true)
-        .frame(width: 300, alignment: .center)
+        .frame(alignment: .center)
         .padding(.horizontal, 12)
         .padding(.top, 12)
         .padding(.bottom, 0)
@@ -112,60 +139,81 @@ struct ContentView: View, LiveInputHandler {
         List {
             ForEach(ferry.souls) { soul in
                 HStack {
-                    Image(systemName: "line.horizontal.3")
+//                    Image(systemName: "line.horizontal.3")
+//                        .resizable()
+//                        .frame(width: 5, height: 11)
+//                        .opacity((soulHovering[soul.id] ?? false) ? 1.0 : 0.2)
+//                        .padding(0)
+                    Text(soul.name)
+                        .opacity(((soulHovering[soul.id] ?? false) && !(soulResultHovering[soul.id] ?? false)) ? 1.0 : 0.5)
                         .padding(0)
-                    Button(action: {
-                        //
-                    }) {
-                        Text(soul.name)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding(0)
                     
                     if soul.result != nil {
-                        let errored = soul.result!.status != 0
-                        let display = showErrors && errored ? soul.result!.error : soul.result!.output
+                        let display = getDisplayText(soul)
+                        
                         Button(action: {
-                            performCopy(copyText: display)
+                            performCopy(copyText: display.text)
                         }) {
-                            Text(display)
-                                .foregroundColor(errored ? .red : .green)
-                                .lineLimit(nil)
+                            Text(display.text)
+                                .foregroundColor(display.color)
                                 .padding(0)
                         }
+                        .lineLimit(nil)
                         .buttonStyle(PlainButtonStyle())
                         .padding(0)
+                        .onHover(perform: { hovering in
+                            soulResultHovering[soul.id] = hovering
+                        })
                     }
-                }.padding(0)
+                }
+                .padding(0)
+                .onHover(perform: { hovering in
+                    soulHovering[soul.id] = hovering
+                })
             }
             .onMove(perform: moveSoul)
             .fixedSize() // to fix weird resizing issue
             .padding(0)
         }
+        .frame(width: 300)
     }
     
-    // Close Button
-    var closeView: some View {
+    let fadeGradient = Gradient(colors: [
+        Color(NSColor.textBackgroundColor.withAlphaComponent(0)),
+        Color(NSColor.textBackgroundColor.withAlphaComponent(1))
+    ])
+    
+    //Buttons
+    var buttonsView: some View {
         VStack {
             Spacer()
-            HStack {
+            HStack(spacing: 0, content: {
                 Spacer()
                 Button(action: {
                     showErrors = !showErrors
                 }) {
-                    Image(systemName: "exclamationmark.circle")
+                    Image(systemName: showErrorsHovering ? "exclamationmark.circle.fill" : "exclamationmark.circle")
+                        .colorMultiply( showErrors ? .red : .white)
                 }
+                .onHover(perform: { hovering in
+                    showErrorsHovering = hovering
+                })
                 .buttonStyle(PlainButtonStyle())
                 .padding(2)
                 
                 Button(action: {
                     NSApplication.shared.terminate(self)
                 }) {
-                    Image(systemName: "xmark.circle")
+                    Image(systemName: exitHovering ? "xmark.circle.fill" : "xmark.circle")
                 }
+                .onHover(perform: { hovering in
+                    exitHovering = hovering
+                })
                 .buttonStyle(PlainButtonStyle())
                 .padding(2)
-            }
+            })
+            .frame(height: 32, alignment: .bottom)
+            .background(LinearGradient(gradient: fadeGradient, startPoint: .top, endPoint: .bottom))
         }
     }
     
@@ -208,7 +256,7 @@ struct ContentView: View, LiveInputHandler {
             
         }.frame(alignment: .center)
         .overlay (
-            closeView
+            buttonsView
         )
         .overlay(
             quickNotifyView
@@ -222,8 +270,7 @@ protocol LiveInputHandler {
     
     func getOutput(
         liveInput: LiveInput,
-        input: String,
-        typing: Bool
+        input: String
     )
 }
 
@@ -231,15 +278,12 @@ class LiveInput: ObservableObject {
     
     var handler: LiveInputHandler!
     
-    @Published var typing: Bool = false
-    
     @Published var value: String = "" {
-        didSet {
+        didSet {            
             if self.handler != nil {
                 self.handler!.getOutput(
                     liveInput: self,
-                    input: self.value,
-                    typing: self.typing
+                    input: self.value
                 )
             }
         }
@@ -253,6 +297,85 @@ extension View {
             self.hidden()
         } else {
             self
+        }
+    }
+}
+
+struct InputTextField: NSViewRepresentable {
+    @Binding var text: String
+    
+    let placeHolder: String
+    let onEnter: () -> Void
+    let onInternalChange: (NSTextField) -> Void
+    
+    init(placeHolder: String, text: Binding<String>,
+         onEnter: @escaping () -> Void,
+         onInternalChange: @escaping (NSTextField) -> Void) {
+        
+        self._text = text
+        
+        self.placeHolder = placeHolder
+        self.onEnter = onEnter
+        self.onInternalChange = onInternalChange
+    }
+    
+    func makeNSView(context: Context) -> NSTextField {
+        let textfield = NSTextField()
+        textfield.stringValue = text
+        textfield.placeholderString = placeHolder
+        textfield.delegate = context.coordinator
+        
+        onInternalChange(textfield)
+        
+        return textfield
+    }
+    
+    func updateNSView(_ textfield: NSTextField, context: Context) {
+        
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, NSTextFieldDelegate {
+        
+        let parent: InputTextField
+        
+        init(_ parent: InputTextField) {
+            self.parent = parent
+        }
+        
+        func updateText(_ notification: Notification) {
+            guard let textView = notification.object as? NSTextField else {
+                return
+            }
+            self.parent.text = textView.stringValue
+            print("updateText", self.parent.text)
+        }
+        
+        func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+            if commandSelector == #selector(NSResponder.insertNewline(_:)) {
+                textView.selectAll(self)
+                self.parent.onEnter()
+                return true
+            }
+            return false
+        }
+        
+        func controlTextDidBeginEditing(_ notification: Notification) {
+            updateText(notification)
+            print("Begin editing")
+        }
+        
+        func controlTextDidChange(_ notification: Notification) {
+            updateText(notification)
+            print("Text did change")
+        }
+        
+        func controlTextDidEndEditing(_ notification: Notification) {
+            updateText(notification)
+            print("End editing")
         }
     }
 }

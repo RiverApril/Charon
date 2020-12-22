@@ -12,6 +12,7 @@
 		854D8C862589E2EC00607035 /* bin.soul.py in Resources */ = {isa = PBXBuildFile; fileRef = 854D8C852589E2EC00607035 /* bin.soul.py */; };
 		85C98D98258AADFB0025B02F /* spell.soul.py in Resources */ = {isa = PBXBuildFile; fileRef = 85C98D97258AADFB0025B02F /* spell.soul.py */; };
 		85C98D9C258AD57A0025B02F /* calc.py in Resources */ = {isa = PBXBuildFile; fileRef = 85C98D9B258AD57A0025B02F /* calc.py */; };
+		85C9B56625919C6500E92A05 /* dict.xsoul.py in Resources */ = {isa = PBXBuildFile; fileRef = 85C9B56525919C6500E92A05 /* dict.xsoul.py */; };
 		85D4736425874145007F2C78 /* KharonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4736325874145007F2C78 /* KharonApp.swift */; };
 		85D4736625874145007F2C78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4736525874145007F2C78 /* ContentView.swift */; };
 		85D4736825874146007F2C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D4736725874146007F2C78 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		854D8C852589E2EC00607035 /* bin.soul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = bin.soul.py; sourceTree = "<group>"; };
 		85C98D97258AADFB0025B02F /* spell.soul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = spell.soul.py; sourceTree = "<group>"; };
 		85C98D9B258AD57A0025B02F /* calc.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = calc.py; sourceTree = "<group>"; };
+		85C9B56525919C6500E92A05 /* dict.xsoul.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = dict.xsoul.py; sourceTree = "<group>"; };
 		85D4736025874145007F2C78 /* Kharon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kharon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85D4736325874145007F2C78 /* KharonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KharonApp.swift; sourceTree = "<group>"; };
 		85D4736525874145007F2C78 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,12 +111,13 @@
 			isa = PBXGroup;
 			children = (
 				85D473822587F4B5007F2C78 /* dec.soul.py */,
-				85D4737925875C38007F2C78 /* echo.xsoul.sh */,
-				854D8C772589CA4200607035 /* bases.xsoul.py */,
 				854D8C822589E2C100607035 /* hex.soul.py */,
 				854D8C852589E2EC00607035 /* bin.soul.py */,
 				85C98D97258AADFB0025B02F /* spell.soul.py */,
 				85C98D9B258AD57A0025B02F /* calc.py */,
+				85D4737925875C38007F2C78 /* echo.xsoul.sh */,
+				854D8C772589CA4200607035 /* bases.xsoul.py */,
+				85C9B56525919C6500E92A05 /* dict.xsoul.py */,
 			);
 			path = Souls;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				854D8C832589E2C100607035 /* hex.soul.py in Resources */,
 				85D4737A25875C38007F2C78 /* echo.xsoul.sh in Resources */,
 				85D4736B25874146007F2C78 /* Preview Assets.xcassets in Resources */,
+				85C9B56625919C6500E92A05 /* dict.xsoul.py in Resources */,
 				854D8C782589CA4200607035 /* bases.xsoul.py in Resources */,
 				85C98D9C258AD57A0025B02F /* calc.py in Resources */,
 				85D4736825874146007F2C78 /* Assets.xcassets in Resources */,

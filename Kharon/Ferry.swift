@@ -10,13 +10,11 @@ import Combine
 
 struct Evaluation {
     
-    init(input: String, type: EvaluationType) {
+    init(input: String) {
         self.input = input
-        self.type = type
     }
     
     let input: String
-    let type: EvaluationType
 }
 
 enum EvaluationType {
@@ -36,10 +34,23 @@ class Soul : Identifiable {
     private let launcher: [String]
     
     var result: SoulResult? = nil
+    var lastGoodResult: SoulResult? = nil
+    
+    var isRunning = false {
+        didSet {
+            if !isRunning {
+                while !oneTimeDoneListeners.isEmpty {
+                    oneTimeDoneListeners.popLast()!()
+                }
+            }
+        }
+    }
     
     private var newestInstance: Int = 0
     
     private var lastTask: Process?
+    
+    var oneTimeDoneListeners: [() -> Void] = []
     
     
     init(name: String, path: String, launcher: [String]) {
@@ -60,6 +71,8 @@ class Soul : Identifiable {
         
         task.standardOutput = pipeOut
         task.standardError = pipeErr
+        
+        isRunning = true
         
         task.launch()
         
@@ -86,6 +99,14 @@ class Soul : Identifiable {
                     error: error.trimmingCharacters(in: .whitespacesAndNewlines),
                     status: status
                 )
+                
+                self.result = result
+                
+                if self.result!.status == 0 {
+                    self.lastGoodResult = result
+                }
+                
+                isRunning = false
                 
                 callback(result)
             }
@@ -186,6 +207,44 @@ class Ferry: ObservableObject {
         saveSoulOrder()
     }
     
+    func whenFirstNonEmptyResult(do foundFirstNonEmptyResult: @escaping (SoulResult) -> Void) {
+        
+        var done = false
+        
+        let checker: () -> Void = { [self] in
+            if !done {
+                for soul in souls {
+                    if soul.isRunning {
+                        break
+                    } else {
+                        if soul.result != nil {
+                            if !soul.result!.output.isEmpty {
+                                foundFirstNonEmptyResult(soul.result!)
+                                break
+                            }
+                        }
+                        continue
+                    }
+                }
+                done = true
+            }
+        }
+        
+        for soul in souls {
+            soul.oneTimeDoneListeners.append(checker)
+        }
+        
+        checker()
+        
+    }
+    
+    func clearAllLastGoodResults() {
+        for soul in souls {
+            soul.lastGoodResult = nil
+        }
+        self.objectWillChange.send()
+    }
+    
     func evaluate(evaluation: Evaluation) {
         
         for soul in souls {
@@ -193,7 +252,6 @@ class Ferry: ObservableObject {
             soul.run(input: evaluation.input, callback: { result in
                 DispatchQueue.main.sync {
                     print("Finished Soul \(soul.name) > \(result.output)")
-                    soul.result = result
                     self.objectWillChange.send()
                 }
             })
