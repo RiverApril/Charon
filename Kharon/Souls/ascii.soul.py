@@ -8,7 +8,7 @@ input = " ".join(sys.argv[1:])
 if len(input) == 0:
     exit(0)
 
-eval_result = calc.evaluate(input)
+eval_result = calc.evaluate(input) 
 
 info = ""
 
@@ -53,11 +53,11 @@ def get_info(number):
         if integer >= ord(" ") and integer <= ord("~"):
             return chr(integer)
         elif integer >= 0 and integer <= 31:
-            return first_32_code_names[integer]
+            return "｢" + first_32_code_names[integer] + "｣"
         elif integer == 127:
-            return "DEL"
+            return "｢DEL｣"
         else:
-            return "ERR"
+            return "｢ERR｣"
     else:
         exit(-1)
 

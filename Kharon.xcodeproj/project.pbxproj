@@ -119,11 +119,11 @@
 				854D8C852589E2EC00607035 /* bin.soul.py */,
 				85C98D97258AADFB0025B02F /* spell.soul.py */,
 				85C98D9B258AD57A0025B02F /* calc.py */,
-				85D4737925875C38007F2C78 /* echo.xsoul.sh */,
 				854D8C772589CA4200607035 /* bases.xsoul.py */,
-				85C9B56525919C6500E92A05 /* dict.xsoul.py */,
 				85C9B56A2591CFFF00E92A05 /* ascii.soul.py */,
 				85C9B56E2591D10A00E92A05 /* ord.soul.py */,
+				85D4737925875C38007F2C78 /* echo.xsoul.sh */,
+				85C9B56525919C6500E92A05 /* dict.xsoul.py */,
 			);
 			path = Souls;
 			sourceTree = "<group>";
