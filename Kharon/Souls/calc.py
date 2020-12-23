@@ -37,6 +37,9 @@ def preprocess(raw):
 
 
 def evaluate(raw):
+    if len(raw) == 0:
+        return ""
+    
     input = preprocess(raw)
     result = eval(input)
     return result
@@ -73,7 +76,7 @@ def to_base(nums, base, log_func, code_letter, prefix):
         return to_base_single(nums, base, log_func, code_letter, prefix)
     
     elif type(nums) is str:
-        return str
+        return nums
     
     else:
         return str(nums)
