@@ -60,7 +60,7 @@ struct KharonCommands: Commands {
 }
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var popover = NSPopover.init()
+    var popover = NSPopover()
     var statusBarItem: NSStatusItem?
     var menuBarIcon: NSImage?
     
@@ -91,7 +91,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func showPopover(from sender: AnyObject?) {
         if let button = statusBarItem?.button {
-            popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .maxY)
             popoverView.editSelectAll()
         }
     }
