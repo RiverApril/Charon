@@ -20,7 +20,7 @@ var appData = AppData()
 struct CharonApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    var menuBar: MenuBarExtra<Label<Text, Image>, ContentView> = MenuBarExtra("Charon Menu Bar", image: "MenuBarIcon") {
+    var menuBar: MenuBarExtra<Label<Text, Image>, ContentView> = MenuBarExtra("Charon Menu Bar", image: "MenuBarIconTemplate") {
         ContentView()
     }
     
