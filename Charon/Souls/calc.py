@@ -1,5 +1,9 @@
 import re
 from math import *
+from random import *
+
+def randascii(size):
+    return ''.join([chr(randint(32, 126)) for i in range(size)])
 
 def log16(x):
     return log2(x) / 4
