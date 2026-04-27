@@ -31,6 +31,8 @@ class Soul : Identifiable, ObservableObject {
             }
         }
     }
+
+    private var prefixWhenOutputIsInput: String? = "✓ "
     
     private var lastInput: String? = nil
     
@@ -149,7 +151,7 @@ class Soul : Identifiable, ObservableObject {
         } else if let soulResult = result {
             if soulResult.status != 0 {
                 if showErrors {
-                    return (text: soulResult.error, color: .red)
+                    return (text: soulResult.output + "\n" + soulResult.error, color: .red)
                 } else if lastGoodResult != nil {
                     return (text: lastGoodResult!.output, color: .yellow)
                 } else {
@@ -159,7 +161,11 @@ class Soul : Identifiable, ObservableObject {
                 if (isHovering) {
                     return (text: soulResult.output, color: .blue)
                 } else {
-                    return (text: soulResult.output, color: .green)
+                    if (!soulResult.output.isEmpty && prefixWhenOutputIsInput != nil && soulResult.output == lastInput) {
+                        return (text: (prefixWhenOutputIsInput ?? "") + soulResult.output, color: .green)
+                    } else {
+                        return (text: soulResult.output, color: .green)
+                    }
                 }
             }
         }
