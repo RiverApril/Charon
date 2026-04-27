@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-import calc
+import calc as calc
 from math import floor
 
 # https://stackoverflow.com/questions/5124743/algorithm-for-simplifying-decimal-to-fractions
@@ -34,45 +34,47 @@ def pos_real_to_frac(x, error = 0.000001):
             return (n * middle_d + middle_n, middle_d)
 
 
-input = " ".join(sys.argv[1:])
+user_input = " ".join(sys.argv[1:])
 
-real = calc.evaluate(input)
+real = calc.evaluate(user_input)
 
-is_negative = real < 0
+if not isinstance(real, str):
 
-if is_negative:
-    real = -real
+    is_negative = real < 0
 
-whole = int(floor(real))
-real -= whole
+    if is_negative:
+        real = -real
 
-fraction = pos_real_to_frac(real)
+    whole = int(floor(real))
+    real -= whole
 
-error = real - fraction[0]/fraction[1]
+    fraction = pos_real_to_frac(real)
 
-result = ""
-have_parenths = False
-if is_negative and whole > 0 and fraction[0] > 0:
-    have_parenths = True
+    error = real - fraction[0]/fraction[1]
+
+    result = ""
+    have_parenths = False
+    if is_negative and whole > 0 and fraction[0] > 0:
+        have_parenths = True
 
 
-if is_negative:
-    result += "-"
-if have_parenths:
-    result += "("
-if whole > 0:
-    result += str(whole)
-if whole > 0 and fraction[0] > 0:
-    result += " + "
-if whole == 0 and fraction[0] == 0:
-    result += "0"
-if fraction[0] > 0:
-    result += str(fraction[0]) + "/" + str(fraction[1])
-if error > 0:
-    result += " +" + str(error)
-elif error < 0:
-    result += " -" + str(-error)
-if have_parenths:
-    result += ")"
+    if is_negative:
+        result += "-"
+    if have_parenths:
+        result += "("
+    if whole > 0:
+        result += str(whole)
+    if whole > 0 and fraction[0] > 0:
+        result += " + "
+    if whole == 0 and fraction[0] == 0:
+        result += "0"
+    if fraction[0] > 0:
+        result += str(fraction[0]) + "/" + str(fraction[1])
+    if error > 0:
+        result += " +" + str(error)
+    elif error < 0:
+        result += " -" + str(-error)
+    if have_parenths:
+        result += ")"
 
-print(result, end="", flush=True)
+    print(result, end="", flush=True)

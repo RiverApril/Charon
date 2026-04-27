@@ -4,15 +4,15 @@ import sys
 from spellchecker import SpellChecker
 
 
-input = " ".join(sys.argv[1:])
+user_input = " ".join(sys.argv[1:])
 
-if any(c.isnumeric() for c in input):
+if any(c.isnumeric() for c in user_input):
     exit(0) # it's got numbers, probably not meant for spell checking
 
 
 spell = SpellChecker()
 
-words = spell.split_words(input)
+words = spell.split_words(user_input)
 
 
 if len(words) == 1:
@@ -27,4 +27,4 @@ else:
 
     display = ["?" if correction is None else correction for correction in corrections]
 
-print(" ".join(display), end="", flush=True)
+print(", ".join(display), end="", flush=True)

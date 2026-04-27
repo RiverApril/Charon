@@ -4,11 +4,12 @@ import sys
 from functools import cache
 import pickle
 import os
-from spellchecker import SpellChecker
+from spellchecker import SpellChecker, WordFrequency
 from collections import Counter
 
-
-all_words_with_freq = SpellChecker().word_frequency.dictionary.items()
+spell = SpellChecker()
+word_freq = WordFrequency()
+all_words_with_freq = spell.word_frequency.dictionary.items()
 all_words = [k for k, v in sorted(all_words_with_freq, key=lambda item: item[1], reverse=True)]
 for letter in "bcdefghjklmnopqrstuvwxyz": # removing single-letter words other than a and i
     all_words.remove(letter)
@@ -109,7 +110,7 @@ def anagrams(letters, shape):
         else:
             yield word
 
-def parse_and_find_anagrams(input):
+def parse_and_find_anagrams(user_input):
 
     # examples:
 
@@ -157,7 +158,7 @@ def parse_and_find_anagrams(input):
     defined_shape = []
     extra_spaces_okay = True
     leftovers_okay = False
-    for c in input:
+    for c in user_input:
         if awaiting_escape:
             awaiting_escape = False
         else:
@@ -228,12 +229,19 @@ def parse_and_find_anagrams(input):
                 else:
                     print(", ", end="")
                 print(anagram, end="", flush=True)
+                # yield anagram
+
+user_input = " ".join(sys.argv[1:])
+
+if any(c.isnumeric() for c in user_input):
+    exit(0) # it's got numbers, probably not meant for anagrams
+
+parse_and_find_anagrams(user_input.lower())
 
 
-input = " ".join(sys.argv[1:])
+# def word_freq_sum(words):
+#     return sum([word_freq.dictionary[word] for word in words])
 
-if any(c.isnumeric() for c in input):
-    exit(0) # it's got numbers, probably not meant for spell checking
-
-parse_and_find_anagrams(input.lower())
-
+# found_anagrams = list(parse_and_find_anagrams(user_input.lower()))
+# found_anagrams.sort(key=word_freq_sum)
+# print(", ".join(found_anagrams))

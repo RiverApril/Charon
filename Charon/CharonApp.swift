@@ -5,7 +5,6 @@
 //  Created by Emily Atlee on 12/13/20.
 //
 
-import SwiftUICore
 import SwiftUI
 import AppKit
 

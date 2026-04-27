@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import SwiftUICore
 import SwiftUI
 
 struct SoulView : View {
@@ -43,6 +42,7 @@ struct SoulView : View {
                 performCopy(display.text)
             }) {
                 Text(display.text)
+                    .font(.default.monospaced())
                     .foregroundColor(display.color)
                     .padding(0)
                     .lineLimit(multiline ? 100 : 1)

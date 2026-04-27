@@ -123,7 +123,7 @@ struct ContentView: View, LiveInputHandler/*, PreviewProvider*/ {
         .padding(.horizontal, 12)
         .padding(.top, 12)
 //        .padding(.bottom, -12)
-        .onAppear(perform: {inputIsFocused = true})
+        .onAppear(perform: {DispatchQueue.main.async{inputIsFocused = true}})
     }
     
     // Output
@@ -144,6 +144,7 @@ struct ContentView: View, LiveInputHandler/*, PreviewProvider*/ {
             .listRowSeparator(.hidden)
 //            .border(.red)
         }
+        .scrollBounceBehavior(.always)
         .padding(.horizontal, 6)
 //        .border(.blue)
         .listStyle(.plain)
@@ -222,7 +223,7 @@ struct ContentView: View, LiveInputHandler/*, PreviewProvider*/ {
             inputView
             Divider()
             outputView
-        }.frame(height: 250, alignment: .center)
+        }.frame(width: 300, height: 280, alignment: .center)
         .overlay (
             buttonsView
         )

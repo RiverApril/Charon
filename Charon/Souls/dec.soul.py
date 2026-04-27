@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import sys
-import calc
+import calc as calc
 
-input = " ".join(sys.argv[1:])
+user_input = " ".join(sys.argv[1:])
 
-calculated = calc.evaluate(input)
+calculated = calc.evaluate(user_input)
 
 print(calculated, end="", flush=True)

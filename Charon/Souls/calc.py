@@ -2,27 +2,44 @@ import re
 from math import *
 from random import *
 
-def randascii(size):
-    return ''.join([chr(randint(32, 126)) for i in range(size)])
+import string
+import secrets
+from functools import reduce
+from unit_tree import unit_convert
+convert = unit_convert
+
+default_alphabet = string.ascii_letters + string.digits + string.punctuation
+
+def password(size, alphabet = default_alphabet):
+    return ''.join(secrets.choice(alphabet) for i in range(size))
+
+# https://stackoverflow.com/questions/6800193/what-is-the-most-efficient-way-of-finding-all-the-factors-of-a-number-in-python
+def factors(n):
+    return sorted(set(reduce(
+        list.__add__,
+        ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0))))
 
 def log16(x):
     return log2(x) / 4
 
+def rslvl2xp(L):
+    return floor(0.25 * sum((floor(l + 300.0 * 2.0**(l / 7.0)) for l in range(1, L))))
+
 def preprocess(raw):
     
-    input = raw
+    user_input = raw
     
     # Add implicit multiplication like '42(' -> '42*('
     anynum_pattern = r"([0-9]+\.?[0-9]*|0b[01]+\.?[01]*|0x[0-9a-f]+\.?[0-9a-f]+)"
-    input = re.sub(anynum_pattern + r"(\()", r"\1*\2", input) # prefix 42( -> 42*(
-    input = re.sub(r"(\))" + anynum_pattern, r"\1*\2", input) # suffix )42 -> )*42
-    input = re.sub(r"(\))(\()", r"\1*\2", input) # two parenthesis groups )( -> )*(
+    user_input = re.sub(anynum_pattern + r"(\()", r"\1*\2", user_input) # prefix 42( -> 42*(
+    user_input = re.sub(r"(\))" + anynum_pattern, r"\1*\2", user_input) # suffix )42 -> )*42
+    user_input = re.sub(r"(\))(\()", r"\1*\2", user_input) # two parenthesis groups )( -> )*(
     #
 
     # Fix missing ( and ) on edges
     extra_open = 0
     level = 0
-    for c in input:
+    for c in user_input:
         if c == "(":
             level += 1
         elif c == ")":
@@ -34,18 +51,18 @@ def preprocess(raw):
             
     extra_close = level
     
-    input = ("(" * extra_open) + input + (")" * extra_close)
+    user_input = ("(" * extra_open) + user_input + (")" * extra_close)
     #
     
-    return input
+    return user_input
 
 
 def evaluate(raw):
     if len(raw) == 0:
         return ""
     
-    input = preprocess(raw)
-    result = eval(input)
+    user_input = preprocess(raw)
+    result = eval(user_input)
     return result
     
 

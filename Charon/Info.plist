@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>NSSupportsAutomaticTermination</key>
-	<false/>
+	<true/>
 	<key>NSSupportsSuddenTermination</key>
-	<false/>
+	<true/>
 </dict>
 </plist>

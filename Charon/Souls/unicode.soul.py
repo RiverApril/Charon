@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 import sys
-import calc
+import calc as calc
 
-input = " ".join(sys.argv[1:])
+user_input = " ".join(sys.argv[1:])
 
-if len(input) == 0:
+if len(user_input) == 0:
     exit(0)
 
-eval_result = calc.evaluate(input)
+eval_result = calc.evaluate(user_input)
 
 info = ""
 
